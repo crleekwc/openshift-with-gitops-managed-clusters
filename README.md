@@ -108,6 +108,10 @@ spec:
 ## Skeleton branch
 I left a skeleton branch available, of just one application(local storage operator) and a sample environment, as a starting point for anyone that wants to use this repository to start their own project.
 
+## Things TODO
+- Figure out way that SealedSecrets will integrate into this methodology.
+ 
+
 ## References
 - https://github.com/redhat-cop/gitops-catalog
 - https://github.com/gitops-working-group/gitops-working-group
