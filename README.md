@@ -7,7 +7,7 @@ The provided Cluster Role Binding provides cluster-admin to all of the service a
 oc apply -f ClusterRoleBinding.openshift-gitops-cluster-admin.yaml
 ```
 
-## Structure of the project
+## Structure Of The Repository
 Currently this is the file structures that I have decided upon to use to distinguish the multiple environments. In this example you can see that the Applications folder is where you would store the base files for each Application to be configured. Applications in this context could mean an application or appliance or any resource that needs to be configured. The Projects folder is where you store projects, projects in this context means our cluster environment we want to configure.
 ```
 Repository
