@@ -1,14 +1,14 @@
-# Single Node Gitops
+# OpenShift Cluster Wide Managed Gitops
 This repository is created as a proof of concept on how you can use gitops to administer cluster wide configuration changes to your cluster. If you see anything in this repository that is best practice please reachout to me at chrilee@redhat.com or create and issue in this repository.
 
 ## Provide Cluster Wide Permissions For The Gitops Controller
-The provided Cluster Role Binding provides cluster-admin to all of the service accounts that gitops uses. This will allow gitops to create resources in OpenShift managed name spaces. 
+The provided Cluster Role Binding provides cluster-admin to all of the service accounts that gitops uses. This will allow gitops to create resources in OpenShift managed namespaces. 
 ```
 oc apply -f ClusterRoleBinding.openshift-gitops-cluster-admin.yaml
 ```
 
 ## Structure of the project
-Currently this is the file structures that I have decided upon to use to distinguish the multiple environments. In this example you can see that the Applications folder is where you would store the base files for each Application to be configured. Applications in this context can mean an application or appliance or any resource that needs to be configured.
+Currently this is the file structures that I have decided upon to use to distinguish the multiple environments. In this example you can see that the Applications folder is where you would store the base files for each Application to be configured. Applications in this context could mean an application or appliance or any resource that needs to be configured. The Projects folder is where you store projects, projects in this context could means our cluster environment we want to configure.
 ```
 Repository
 	- ClusterRoleBinding.yaml
@@ -26,6 +26,85 @@ Repository
 						◊ Kustomize.yaml <--- configuration customization for the each individual app
 ```
 
+## How To Test Configurations
+Run the following kustomize command to test if it will build successfully.
+```
+kustomize build Projects/sample-environment
+```
+
+### Sample Ouput:
+```
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: "-1"
+  name: openshift-local-storage
+---
+apiVersion: local.storage.openshift.io/v1
+kind: LocalVolume
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: "0"
+  name: image-registry-local-storage
+  namespace: openshift-local-storage
+spec:
+  logLevel: Debug
+  managementState: Managed
+  storageClassDevices:
+  - devicePaths:
+    - /dev/sdb
+    fsType: xfs
+    storageClassName: image-registry
+    volumeMode: Filesystem
+---
+apiVersion: local.storage.openshift.io/v1
+kind: LocalVolume
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: "0"
+  name: monitoring-local-storage
+  namespace: openshift-local-storage
+spec:
+  logLevel: Debug
+  managementState: Managed
+  storageClassDevices:
+  - devicePaths:
+    - /dev/sdc
+    fsType: xfs
+    storageClassName: monitoring
+    volumeMode: Filesystem
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: "0"
+  name: local-operator-group
+  namespace: openshift-local-storage
+spec:
+  targetNamespaces:
+  - openshift-local-storage
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: "0"
+  name: local-storage-operator
+  namespace: openshift-local-storage
+spec:
+  channel: stable
+  installPlanApproval: Automatic
+  name: local-storage-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+```
 
 ## References
 
