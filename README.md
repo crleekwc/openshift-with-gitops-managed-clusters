@@ -47,7 +47,7 @@ kind: LocalVolume
 metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-wave: "1"
   name: image-registry-local-storage
   namespace: openshift-local-storage
 spec:
@@ -65,7 +65,7 @@ kind: LocalVolume
 metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-wave: "1"
   name: monitoring-local-storage
   namespace: openshift-local-storage
 spec:
