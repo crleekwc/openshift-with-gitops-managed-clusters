@@ -1,4 +1,4 @@
-# OpenShift Cluster Wide Managed Gitops
+# OpenShift With Gitops Managed Clusters
 This repository is created as a proof of concept on how you can use gitops to administer cluster wide configuration changes to your cluster. If you see anything in this repository that is best practice please reachout to me at chrilee@redhat.com or create an issue in this repository.
 
 ## Provide Cluster Wide Permissions For The Gitops Controller
