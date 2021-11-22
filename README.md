@@ -107,4 +107,6 @@ spec:
 ```
 
 ## References
-
+- https://github.com/redhat-cop/gitops-catalog
+- https://github.com/gitops-working-group/gitops-working-group
+- https://github.com/redhat-developer/openshift-gitops-getting-started
