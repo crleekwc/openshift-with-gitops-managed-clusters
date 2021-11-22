@@ -1,0 +1,30 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+namespace: openshift-local-storage
+
+bases:
+  - ../../../../../../../Applications/local-storage/create-local-volumes/base
+
+patches:
+  - target:
+      kind: LocalVolume
+      name: local-storage
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: image-registry-local-storage
+      - op: replace
+        path: /spec/managementState
+        value: Managed
+      - op: replace
+        path: /spec/logLevel
+        value: Debug
+      - op: replace
+        path: /spec/storageClassDevices
+        value:
+          - devicePaths:
+            - /dev/sdb
+            fsType: xfs
+            storageClassName: image-registry
+            volumeMode: Filesystem
