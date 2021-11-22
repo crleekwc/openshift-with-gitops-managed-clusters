@@ -110,3 +110,4 @@ spec:
 - https://github.com/redhat-cop/gitops-catalog
 - https://github.com/gitops-working-group/gitops-working-group
 - https://github.com/redhat-developer/openshift-gitops-getting-started
+- https://docs.google.com/document/d/1147S5yOdj5Golj3IrTBeeci2E1CjAkieGCcl0w90BS8/edit#heading=h.w8ey4tssu45h
