@@ -1,0 +1,14 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+bases:
+  - ../../../../../../Applications/local-storage/operator/base
+
+patches:
+  - target:
+      kind: Subscription
+      name: local-storage-operator
+    patch: |-
+      - op: replace
+        path: /spec/channel
+        value: 'stable'
