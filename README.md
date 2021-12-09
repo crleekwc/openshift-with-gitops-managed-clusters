@@ -108,9 +108,6 @@ spec:
   source: redhat-operators
   sourceNamespace: openshift-marketplace
 ```
-## Skeleton branch
-I left a skeleton branch available, of just one application(local storage operator) and a sample environment, as a starting point for anyone that wants to use this repository to start their own project.
-
 ## Things TODO
 - Figure out way that SealedSecrets will integrate into this methodology.
 - I think a script to generate the manifests and the folder structure of the overlays and their respective kustomization files in the projects folder from the applications in the applications folder would be really helpful.
