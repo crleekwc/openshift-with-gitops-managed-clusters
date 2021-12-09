@@ -1,6 +1,9 @@
 # OpenShift With Gitops Managed Clusters
 This repository is created as a proof of concept on how you can use gitops to administer cluster wide configuration changes to your cluster. If you see anything in this repository that isn't best practice please reachout to me at chrilee@redhat.com or create an issue in this repository.
 
+## A Sample Github Repository Using This Template
+https://github.com/crleekwc/single-node-cluster
+
 ## Provide Cluster Wide Permissions For The Gitops Controller
 The provided Cluster Role Binding provides cluster-admin to all of the service accounts that gitops uses. This will allow gitops to create resources in OpenShift managed namespaces. 
 ```
