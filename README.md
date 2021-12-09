@@ -113,7 +113,7 @@ I left a skeleton branch available, of just one application(local storage operat
 
 ## Things TODO
 - Figure out way that SealedSecrets will integrate into this methodology.
- 
+- I think a script to create the folder structure of the overlays in the projects folder from the applications in the applications folder would be really helpful.
 
 ## References
 - https://github.com/redhat-cop/gitops-catalog
